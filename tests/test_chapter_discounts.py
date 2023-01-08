@@ -1,4 +1,3 @@
-import time
 from selenium import webdriver
 
 from pages.discounts_page import Discounts_page
@@ -6,8 +5,6 @@ from pages.discounts_page import Discounts_page
 
 def test_chapter_discounts():
     driver = webdriver.Chrome()
-
-    print('Start test chapter discounts')
 
     discount = Discounts_page(driver)
     discount.check_all_button()
@@ -19,5 +16,4 @@ def test_chapter_discounts():
     discount.check_club_price()
     discount.check_other()
     discount.check_two_one()
-
-    print('Test chapter discounts OK')
+    driver.close()

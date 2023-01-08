@@ -15,6 +15,7 @@ class Search_page(Base):
         self.driver = driver
 
     # Locators
+
     search_product = 'Samsung'
     search = '//*[@name="query"]'
     search_button = '//input[@class="header__search__inputGogogo"]'

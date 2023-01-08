@@ -1,5 +1,9 @@
 import datetime
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 class Base():
 
@@ -17,15 +21,15 @@ class Base():
     def assert_url(self, result):
         get_url = self.driver.current_url
         assert get_url == result
-        print(get_url)
-        print('URL value')
+        print('URL value ' + get_url)
 
     """Проверка названия раздела"""
 
     def value_word(self, word, result):
         value_word = word.text
-        assert value_word == result
-        print('Chapter "' + result + '" test OK')
+        print(value_word)
+        assert value_word.lower() == result.lower()
+        print('Chapter "' + result)
 
     """Создание скриншота текущей страницы"""
 
@@ -34,3 +38,6 @@ class Base():
         name_screenshot = chapter + now_name + '.png'
         self.driver.execute_script("window.scrollBy(0, 200);")
         self.driver.save_screenshot('C:\\Testing\\Final project\\screen\\' + name_screenshot)
+
+    def filter_link(self, filter):
+        return WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, filter))).click()

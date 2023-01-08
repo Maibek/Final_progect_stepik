@@ -1,6 +1,5 @@
 import time
 
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -60,7 +59,7 @@ class Main_page(Base):
         if self.get_city().text != 'Санкт-Петербург':
             self.get_city().click()
             time.sleep(2)
-            self.driver.switch_to.window('//*[@id="popup_cityselectnew"]').click()
+            self.driver.switch_to.window('//*[@id="popup_cityselectnew"]')
             selected_city = self.driver.element(By.XPATH, '//a[@title="Санкт-Петербург"]')
             """Не работает поиск элемента."""
             selected_city.click()
@@ -68,66 +67,41 @@ class Main_page(Base):
             print('Selected city ' + selected_city.text)
         else:
             print('Search city error')
-        time.sleep(2)
 
     def click_catalog(self):
         self.get_catalog().click()
         print('Click catalog button')
-        time.sleep(2)
 
     def input_search(self, product):
         self.get_search().send_keys(product)
         print('Input search')
-        time.sleep(2)
 
     def click_search_button(self):
         self.get_search_button().click()
         print('Click search button')
-        time.sleep(2)
 
     def click_login(self):
         self.get_login().click()
         print('Click login button')
-        time.sleep(2)
 
     def click_cart(self):
         self.get_cart().click()
         print('Click cart button')
-        time.sleep(2)
 
     def click_favorites(self):
         self.get_favorites().click()
         print('Click catalog button')
-        time.sleep(2)
 
     def click_discounts(self):
         self.get_discounts().click()
         print('Click catalog button')
-        time.sleep(2)
-
-    # def input_user_name(self, user_name):
-    #     self.get_user_name().send_keys(user_name)
-    #     print('Input user name')
-    #
-    # def input_password(self, password):
-    #     self.get_password().send_keys(password)
-    #     print('Input password')
-    #
-    # def click_login_button(self):
-    #     self.get_login_button().click()
-    #     print('Click login button')
 
     # Methods
-
-    def check_city(self):
-        self.driver.get(self.url)
-        self.driver.maximize_window()
-        time.sleep(2)
-        # self.search_city()
 
     def check_discounts(self):
         self.driver.get(self.url)
         self.driver.maximize_window()
         time.sleep(2)
         self.click_discounts()
-        self.driver.get_assert_url('https://www.onlinetrade.ru/actions/')
+        self.assert_url('https://www.onlinetrade.ru/actions/')
+        self.screenshot('discounts')
